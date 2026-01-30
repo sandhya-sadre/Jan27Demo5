@@ -1,0 +1,43 @@
+name: Windows .NET Hello World Build - 2 Jobs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-job1:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore HelloProj/HelloProj.csproj
+
+      - name: Build project
+        run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
+
+      - name: Run Hello World
+        run: dotnet run --project HelloProj/HelloProj.csproj --framework net8.0
+
+  build-job2:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore HelloProj/HelloProj.csproj
+
+      - name: Build project
+        run: dotnet build HelloProj/HelloProj.csproj --configuration Release --no-restore
+
+      - name: Run Hello World
+        run: dotnet run --project HelloProj/HelloProj.csproj --framework net8.0
